@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches:
-      - master
 
 jobs:
   check_migrations:
@@ -45,8 +43,6 @@ jobs:
 
     - name: Install Python dependencies
       run: |
-        pip install -r requirements/pip.txt
-        pip install -r requirements/edx/development.txt
         pip uninstall -y mysqlclient
         pip install --no-binary mysqlclient mysqlclient
         pip uninstall -y xmlsec
@@ -72,6 +68,3 @@ jobs:
         echo "CREATE DATABASE IF NOT EXISTS student_module_history_test;" | mysql -u root
 
         echo "Running the LMS migrations."
-        ./manage.py lms --settings bok_choy migrate
-        echo "Running the CMS migrations."
-        ./manage.py cms --settings bok_choy migrate
