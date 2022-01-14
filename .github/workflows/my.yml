@@ -12,15 +12,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-            MYSQL_ALLOW_EMPTY_PASSWORD: yes
-            MYSQL_DATABASE: myapp
-        ports:
-            - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+#    services:
+#      mysql:
+#        image: mysql:5.7
+#        env:
+#            MYSQL_ALLOW_EMPTY_PASSWORD: yes
+#            MYSQL_DATABASE: myapp
+#        ports:
+#            - 3306:3306
+#        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     strategy:
       max-parallel: 4
@@ -28,6 +28,18 @@ jobs:
         python-version: [3.8]
 
     steps:
+    - uses: shogo82148/actions-setup-mysql@v1.3.0
+      with:
+        mysql-version: '8.0'
+        auto-start: true
+      - name: create test database
+        run: mysql -h 127.0.0.1 -P 3306 -u root -e 'CREATE DATABASE test_db;'
+      - name: show databases
+        run: mysql -h 127.0.0.1 -P 3306 -u root -e 'SHOW DATABASES;'
+      - name: setup user
+        run: mysql -h 127.0.0.1 -P 3306 -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
+      - name: flush privileges
+        run: mysql -h 127.0.0.1 -P 3306 -u root -e 'FLUSH PRIVILEGES' -ppassword
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
