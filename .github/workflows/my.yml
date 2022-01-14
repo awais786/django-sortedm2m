@@ -36,7 +36,6 @@ jobs:
 
     - name: Initiate Services
       run: |
-        sudo systemctl start mongod
         sudo /etc/init.d/mysql start
 
         - name: Reset mysql password
