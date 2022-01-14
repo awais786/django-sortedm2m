@@ -32,14 +32,14 @@ jobs:
       with:
         mysql-version: '8.0'
         auto-start: true
-      - name: create test database
-        run: mysql -h 127.0.0.1 -P 3306 -u root -e 'CREATE DATABASE test_db;'
-      - name: show databases
-        run: mysql -h 127.0.0.1 -P 3306 -u root -e 'SHOW DATABASES;'
-      - name: setup user
-        run: mysql -h 127.0.0.1 -P 3306 -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
-      - name: flush privileges
-        run: mysql -h 127.0.0.1 -P 3306 -u root -e 'FLUSH PRIVILEGES' -ppassword
+    - name: create test database
+      run: mysql -h 127.0.0.1 -P 3306 -u root -e 'CREATE DATABASE test_db;'
+    - name: show databases
+      run: mysql -h 127.0.0.1 -P 3306 -u root -e 'SHOW DATABASES;'
+    - name: setup user
+      run: mysql -h 127.0.0.1 -P 3306 -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
+    - name: flush privileges
+      run: mysql -h 127.0.0.1 -P 3306 -u root -e 'FLUSH PRIVILEGES' -ppassword
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
