@@ -13,8 +13,8 @@ DATABASES = {
         "NAME": os.environ.get("DB_NAME", "mysql"),
         "USER": os.environ.get("DB_USER", 'root'),
         "PASSWORD": os.environ.get("DB_PASSWORD", "root"),
-        "HOST": os.environ.get("DB_HOST", "127.0.0.1"),
-        "PORT": os.environ.get("DB_PORT", 5432)
+        'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     },
 }
 
