@@ -36,7 +36,11 @@ jobs:
 
     - name: Initiate Services
       run: |
+        sudo /etc/init.d/mysql stop
+        sudo  service mysql stop
+        sudo killall -KILL mysql mysqld_safe mysqld
         sudo /etc/init.d/mysql start
+        sudo service mysql start
 
         - name: Reset mysql password
           run: |
