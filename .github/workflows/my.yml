@@ -28,23 +28,24 @@ jobs:
         python-version: [3.8]
 
     steps:
-      - name: Initiate Services
-        run: |
-          sudo systemctl start mongod
-          sudo /etc/init.d/mysql start
-
-      - name: Reset mysql password
-        run: |
-          cat <<EOF | mysql -h 127.0.0.1 -u root --password=root
-            UPDATE mysql.user SET authentication_string = null WHERE user = 'root';
-            FLUSH PRIVILEGES;
-          EOF
-
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
+
+    - name: Initiate Services
+      run: |
+        sudo systemctl start mongod
+        sudo /etc/init.d/mysql start
+
+        - name: Reset mysql password
+          run: |
+            cat <<EOF | mysql -h 127.0.0.1 -u root --password=root
+              UPDATE mysql.user SET authentication_string = null WHERE user = 'root';
+              FLUSH PRIVILEGES;
+            EOF
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
