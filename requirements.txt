@@ -3,5 +3,3 @@ isort==4.3.21
 pycodestyle==2.5.0
 pylint-django==2.0.11
 django==3.2
-psycopg2
-mysqlclient
