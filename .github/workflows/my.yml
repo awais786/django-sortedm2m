@@ -30,7 +30,7 @@ jobs:
     steps:
     - uses: shogo82148/actions-setup-mysql@v1.3.0
       with:
-        mysql-version: '8.0'
+        mysql-version: '5.7'
         auto-start: true
     - name: create test database
       run: mysql -h 127.0.0.1 -P 3306 -u root -e 'CREATE DATABASE test_db;'
