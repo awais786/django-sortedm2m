@@ -10,7 +10,7 @@ DB_ENGINE = os.environ.get("DB_ENGINE", "postgresql")
 DATABASES = {
     "default": {
         "ENGINE": f"django.db.backends.mysql",
-        "NAME": os.environ.get("DB_NAME", "test"),
+        "NAME": os.environ.get("DB_NAME", "test_db"),
         "USER": os.environ.get("DB_USER", 'root'),
         "PASSWORD": '',
         'HOST': '',  # Or an IP Address that your DB is hosted on
